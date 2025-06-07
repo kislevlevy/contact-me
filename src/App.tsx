@@ -1,12 +1,10 @@
-import { useTheme } from "@/components/theme-provider";
 import { cn } from "./lib/utils";
 import QRCode from "react-qr-code";
-import data from "@/utils/config";
 
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
-import { Dock, DockIcon } from "./components/ui/dock";
+import data from "./utils/config";
+import { getIconByName, iconNames } from "./utils/iconMap";
+
 import { Separator } from "./components/ui/separator";
-import IconCloud from "@/components/ui/icon-cloud";
 import Icon from "@mdi/react";
 
 import {
@@ -27,6 +25,10 @@ import {
   DialogTrigger,
 } from "./components/ui/dialog";
 import { Card, CardContent, CardHeader } from "./components/ui/card";
+import { IconCloud } from "./components/magicui/icon-cloud";
+import { Dock, DockIcon } from "./components/magicui/dock";
+import { AnimatedGridPattern } from "./components/magicui/animated-grid-pattern";
+import { useTheme } from "./lib/theme-provider";
 
 export default function App() {
   const { setTheme, theme } = useTheme();
@@ -35,7 +37,7 @@ export default function App() {
     <div className="p-5">
       <Card className="max-w-sm m-auto pb-16">
         <CardHeader className="flex flex-row items-center w-full">
-          <img src="/profile.png" className="object-cover w-1/2 rounded-full" />
+          <img src="/me.jpg" className="object-cover w-1/2 rounded-full" />
           <div className="ml-5">
             <h1 className="font-bold text-2xl">{data.name}</h1>
             <h2>{data.role}</h2>
@@ -76,13 +78,22 @@ export default function App() {
               theme === "dark" && "bg-gray-800"
             )}
           >
-            <IconCloud iconSlugs={data.slugs} />
+            <IconCloud
+              icons={iconNames
+                .map((iconName) => {
+                  const IconComponent = getIconByName(iconName);
+                  return IconComponent ? (
+                    <IconComponent key={iconName} size={75} />
+                  ) : null;
+                })
+                .filter(Boolean)}
+            />
           </div>
           <Dock
             className="fixed bottom-10 left-0 right-0"
             direction="bottom"
-            magnification={50}
-            distance={140}
+            iconMagnification={50}
+            iconDistance={140}
           >
             <DockIcon>
               <Dialog>

@@ -1,24 +1,30 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
+import {
+  type ComponentPropsWithoutRef,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react";
 
 import { cn } from "@/lib/utils";
 
-interface GridPatternProps {
+export interface AnimatedGridPatternProps
+  extends ComponentPropsWithoutRef<"svg"> {
   width?: number;
   height?: number;
   x?: number;
   y?: number;
   strokeDasharray?: any;
   numSquares?: number;
-  className?: string;
   maxOpacity?: number;
   duration?: number;
   repeatDelay?: number;
 }
 
-export function GridPattern({
+export function AnimatedGridPattern({
   width = 40,
   height = 40,
   x = -1,
@@ -30,7 +36,7 @@ export function GridPattern({
   duration = 4,
   repeatDelay = 0.5,
   ...props
-}: GridPatternProps) {
+}: AnimatedGridPatternProps) {
   const id = useId();
   const containerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -60,8 +66,8 @@ export function GridPattern({
               ...sq,
               pos: getPos(),
             }
-          : sq,
-      ),
+          : sq
+      )
     );
   };
 
@@ -100,7 +106,7 @@ export function GridPattern({
       aria-hidden="true"
       className={cn(
         "pointer-events-none absolute inset-0 h-full w-full fill-gray-400/30 stroke-gray-400/30",
-        className,
+        className
       )}
       {...props}
     >
@@ -146,5 +152,3 @@ export function GridPattern({
     </svg>
   );
 }
-
-export default GridPattern;
