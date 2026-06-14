@@ -1,3 +1,32 @@
+export const iconSlugs = [
+  "typescript",
+  "javascript",
+  "react",
+  "nodedotjs",
+  "express",
+  "nextdotjs",
+  "git",
+  "github",
+  "java",
+  "c",
+  "python",
+  "django",
+  "fastapi",
+  "postgresql",
+  "mongodb",
+  "reactquery",
+  "tailwindcss",
+  "redux",
+  "tensorflow",
+  "docker",
+  "redis",
+  "rabbitmq",
+  "sqlite",
+  "kubernetes",
+  "linux",
+  "storybook",
+];
+
 export default {
   name: "Kislev Levy",
   role: "Full Stack Developer",
@@ -6,6 +35,6 @@ export default {
   links: {
     github: "https://github.com/kislevlevy",
     linkedin: "https://www.linkedin.com/in/kislevlevy",
-    website: "https://kislev.dev",
+    website: "https://portfolio.kislev.dev/",
   },
 };

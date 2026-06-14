@@ -1,8 +1,7 @@
 import { cn } from "./lib/utils";
 import QRCode from "react-qr-code";
 
-import data from "./utils/config";
-import { getIconByName, iconNames } from "./utils/iconMap";
+import data, { iconSlugs } from "./utils/config";
 
 import { Separator } from "./components/ui/separator";
 import Icon from "@mdi/react";
@@ -25,9 +24,9 @@ import {
   DialogTrigger,
 } from "./components/ui/dialog";
 import { Card, CardContent, CardHeader } from "./components/ui/card";
-import { IconCloud } from "./components/magicui/icon-cloud";
-import { Dock, DockIcon } from "./components/magicui/dock";
-import { AnimatedGridPattern } from "./components/magicui/animated-grid-pattern";
+import { IconCloud } from "./components/ui/icon-cloud";
+import { Dock, DockIcon } from "./components/ui/dock";
+import { AnimatedGridPattern } from "./components/ui/animated-grid-pattern";
 import { useTheme } from "./lib/theme-provider";
 
 export default function App() {
@@ -50,7 +49,7 @@ export default function App() {
                 "p-2 rounded-lg flex justify-between w-full",
                 theme === "dark"
                   ? "hover:bg-gray-800 bg-gray-900"
-                  : "hover:bg-slate-200 bg-slate-100"
+                  : "hover:bg-slate-200 bg-slate-100",
               )}
             >
               <p>Phone</p>
@@ -63,7 +62,7 @@ export default function App() {
                 "p-2 rounded-lg flex justify-between w-full",
                 theme === "dark"
                   ? "hover:bg-gray-800 bg-gray-900"
-                  : "hover:bg-slate-200 bg-slate-100"
+                  : "hover:bg-slate-200 bg-slate-100",
               )}
             >
               <p>Email</p>
@@ -75,18 +74,13 @@ export default function App() {
           <div
             className={cn(
               "relative flex size-full max-w-lg items-center justify-center overflow-hidden rounded-lg",
-              theme === "dark" && "bg-gray-800"
+              theme === "dark" && "bg-gray-800",
             )}
           >
             <IconCloud
-              icons={iconNames
-                .map((iconName) => {
-                  const IconComponent = getIconByName(iconName);
-                  return IconComponent ? (
-                    <IconComponent key={iconName} size={75} />
-                  ) : null;
-                })
-                .filter(Boolean)}
+              images={iconSlugs.map(
+                (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`,
+              )}
             />
           </div>
           <Dock
@@ -105,7 +99,7 @@ export default function App() {
                     <DialogTitle
                       className={cn(
                         theme === "dark" ? "text-[#fafafa]" : "text-[#09090b]",
-                        "text-left"
+                        "text-left",
                       )}
                     >
                       Share digital business card:
@@ -144,7 +138,7 @@ export default function App() {
                 onClick={() =>
                   window.open(
                     "https://api.whatsapp.com/send?phone=" + data.phone,
-                    "_blank"
+                    "_blank",
                   )
                 }
               >
@@ -173,7 +167,7 @@ export default function App() {
         repeatDelay={1}
         className={cn(
           "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]",
-          "inset-x-0 inset-y-[-30%] h-[100%] skew-y-12 -z-10"
+          "inset-x-0 inset-y-[-30%] h-[100%] skew-y-12 -z-10",
         )}
       />
     </div>
